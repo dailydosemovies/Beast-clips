@@ -3,158 +3,223 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Beast Clips — HD Clip Pack</title>
-  <meta name="description" content="Premium HD clip packs for creators — fast downloads, clean delivery." />
+  <title>Beast Clips — Premium Studio Pack</title>
+  <meta name="description" content="Ultra-premium HD clip packs for creators. Fast downloads, cinematic previews, and secure delivery." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg1:#060615; --bg2:#07132a;
-      --glass: rgba(255,255,255,0.04);
-      --muted: #9aa4b2;
-      --accent1: #ff6b6b; --accent2:#6c5ce7;
-      --glass-border: rgba(255,255,255,0.06);
-      --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      --bg-1:#03040a; --bg-2:#071028;
+      --muted:#98a0aa;
+      --accent-a:#00d4ff;
+      --accent-b:#6c5ce7;
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:radial-gradient(1200px 600px at 10% 10%, rgba(108,92,231,0.12), transparent), linear-gradient(180deg,var(--bg1),var(--bg2));color:#eaf2fb}
+    html,body{
+      height:100%; margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background:radial-gradient(800px 400px at 8% 10%, rgba(108,92,231,0.08), transparent),
+                 linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color:#eef6fb;
+    }
 
-    /* animated stars + gradient */
-    .scene{position:fixed;inset:0;pointer-events:none;overflow:hidden}
-    .stars{position:absolute;inset:0;background-image:radial-gradient(#ffffff11 1px, transparent 1px);background-size:40px 40px;opacity:0.06;animation:drift 40s linear infinite}
-    @keyframes drift{from{transform:translateY(0)}to{transform:translateY(-200px)}}
+    .noise{
+      position:fixed; inset:0; pointer-events:none;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><filter id="f"><feTurbulence baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23f)" opacity="0.02"/></svg>');
+      opacity:0.45;
+    }
 
-    .wrap{position:relative;max-width:1080px;margin:42px auto;padding:28px}
-    .panel{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
+    .wrap{max-width:1100px;margin:44px auto;padding:28px;position:relative}
+    .top{display:flex;align-items:center;gap:18px;margin-bottom:16px}
+    .logo{
+      width:92px;height:92px;border-radius:16px;
+      background:linear-gradient(135deg,var(--accent-b),var(--accent-a));
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;color:#021227;font-size:28px;
+    }
+    h1{margin:0;font-family:'Playfair Display',serif;font-size:30px}
+    .tag{color:var(--muted);margin-top:6px}
 
-    /* glass card */
-    .card{background:var(--card-bg);backdrop-filter: blur(8px);border-radius:16px;padding:20px;border:1px solid var(--glass-border);box-shadow:0 20px 60px rgba(2,6,23,0.6)}
+    .panel{
+      display:grid;
+      grid-template-columns:1fr 400px;
+      gap:28px;
+      align-items:start;
+    }
 
-    header.hero{display:flex;gap:18px;align-items:center;margin-bottom:12px}
-    .logo{width:84px;height:84px;border-radius:18px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#071226;font-size:26px;box-shadow:0 8px 30px rgba(108,92,231,0.12)}
-    h1{margin:0;font-size:28px;line-height:1.02}
-    p.lead{margin:8px 0 0;color:var(--muted)}
+    .card{
+      background:rgba(255,255,255,0.02);
+      border-radius:16px;
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.04);
+      box-shadow:0 24px 80px rgba(2,6,23,0.65);
+    }
 
-    /* large preview with device frame */
-    .preview-wrap{border-radius:12px;overflow:hidden;position:relative}
-    .device{width:100%;height:320px;border-radius:12px;background:linear-gradient(180deg,#061029,#08121a);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:inset 0 -40px 80px rgba(0,0,0,0.35)}
-    .device img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02);transition:transform 600ms ease}
-    .play{position:absolute;display:flex;align-items:center;justify-content:center;width:84px;height:84px;border-radius:999px;border:6px solid rgba(255,255,255,0.06);background:linear-gradient(90deg,var(--accent2),var(--accent1));font-size:28px;box-shadow:0 18px 50px rgba(108,92,231,0.18);cursor:pointer}
-    .device:hover img{transform:scale(1.06)}
+    .cinema{
+      position:relative; border-radius:12px;
+      overflow:hidden; background:#000;
+      box-shadow:0 40px 90px rgba(0,0,0,0.6);
+    }
+    .player{
+      display:flex;align-items:center;justify-content:center;
+      height:360px; background:#000; position:relative;
+    }
+    .player img{
+      width:100%;height:100%;object-fit:cover;
+      transform:scale(1);transition:transform .7s cubic-bezier(.2,.9,.25,1);
+    }
+    .player:hover img{transform:scale(1.06)}
 
-    /* content */
-    .meta{padding:12px}
-    .muted{color:var(--muted)}
+    .play-btn{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:96px;height:96px;border-radius:999px;
+      background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
+      display:flex;align-items:center;justify-content:center;
+      font-size:34px;color:#021227;cursor:pointer;
+      box-shadow:0 20px 60px rgba(108,92,231,0.2);
+    }
 
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
-    .feature{background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;align-items:flex-start}
-    .feature strong{display:block;font-size:14px}
-    .feature span{color:var(--muted);font-size:13px}
+    .film{
+      position:absolute;left:10px;top:10px;
+      padding:8px;border-radius:8px;
+      background:rgba(0,0,0,0.25);color:var(--muted);font-size:13px;
+    }
 
-    /* CTA */
-    .cta{margin-top:18px;display:flex;flex-direction:column;gap:12px;align-items:center}
-    .btn-primary{background:linear-gradient(90deg,var(--accent2),var(--accent1));padding:14px 26px;border-radius:14px;color:#fff;font-weight:700;text-decoration:none;box-shadow:0 18px 60px rgba(108,92,231,0.16);border:none;cursor:pointer}
-    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:10px;color:var(--muted)}
-    .note{font-size:13px;color:var(--muted)}
+    .meta h3{margin:8px 0 6px;font-size:18px}
+    .micro{font-size:13px;color:var(--muted)}
 
-    /* aside */
-    aside.side{position:relative}
-    .creator{display:flex;gap:12px;align-items:center;margin-top:6px}
-    .avatar{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent2),var(--accent1));display:flex;align-items:center;justify-content:center;font-weight:800;color:#071226}
+    .features{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .pill{
+      background:rgba(255,255,255,0.02);
+      padding:10px 12px;border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+      font-weight:600;
+    }
 
-    .trust{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .chip{background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:10px;color:var(--muted);font-size:13px;border:1px solid rgba(255,255,255,0.03)}
+    .cta{margin-top:18px;display:flex;gap:12px;align-items:center}
+    .btn-primary{
+      background:linear-gradient(90deg,var(--accent-b),var(--accent-a));
+      padding:14px 28px;border-radius:14px;
+      color:#021227;font-weight:800;border:none;cursor:pointer;
+      box-shadow:0 28px 70px rgba(108,92,231,0.18);
+    }
+    .btn-ghost{
+      background:transparent;border:1px solid rgba(255,255,255,0.06);
+      padding:10px 14px;border-radius:10px;color:var(--muted);
+    }
 
-    footer{margin-top:22px;text-align:center;color:var(--muted);font-size:13px}
+    .float-cta{
+      position:fixed;right:18px;bottom:18px;z-index:60;
+    }
+    .float-cta a{
+      display:inline-block;padding:14px 18px;border-radius:14px;
+      background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
+      color:#021227;font-weight:700;text-decoration:none;
+      box-shadow:0 22px 60px rgba(108,92,231,0.14);
+    }
 
-    /* small animations */
-    .card, .logo{transform:translateY(0);transition:transform 460ms cubic-bezier(.2,.9,.2,1)}
-    .card:hover{transform:translateY(-6px)}
+    aside.side .card{padding:16px}
+    .creator{display:flex;gap:10px;align-items:center;margin-top:8px}
+    .avatar{
+      width:64px;height:64px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent-b),var(--accent-a));
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;color:#021227;
+    }
+    .chip{
+      background:rgba(255,255,255,0.02);
+      padding:8px 10px;border-radius:10px;
+      color:var(--muted);font-size:13px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
 
-    @media (max-width:980px){.panel{grid-template-columns:1fr}.device{height:220px}}
+    footer{
+      margin-top:26px;text-align:center;color:var(--muted);font-size:13px;
+    }
+
+    @media(max-width:980px){
+      .panel{grid-template-columns:1fr}
+      .player{height:220px}
+      .wrap{margin:18px;padding:18px}
+    }
   </style>
 </head>
+
 <body>
-  <div class="scene"><div class="stars"></div></div>
+  <div class="noise"></div>
+
   <div class="wrap">
-    <header class="hero">
+    <div class="top">
       <div class="logo">BC</div>
       <div>
-        <h1>Beast Clips — Premium HD Packs for Creators</h1>
-        <p class="lead">Fast, secure downloads — curated clips optimized for reels, edits and short videos.</p>
-        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-          <a class="btn-ghost" href="https://instagram.com/dailydosemovies007" target="_blank">Instagram</a>
-          <a class="btn-ghost" href="mailto:viradiyavinayak@gmail.com">Contact</a>
-        </div>
+        <h1>Beast Clips — Ultra-Premium Pack</h1>
+        <div class="tag">Cinematic, ready-to-edit clips — built for creators.</div>
       </div>
-    </header>
+    </div>
 
     <div class="panel">
       <main class="card">
-        <div class="preview-wrap">
-          <div class="device" role="button" aria-label="Play preview">
-            <img src="https://images.unsplash.com/photo-1520975698511-1a0a6a7f12d5?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Preview">
-            <div class="play">▶</div>
+        <div class="cinema">
+          <div class="film">Premium Pack • 120 MB</div>
+
+          <div class="player">
+            <img src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=1400&auto=format&fit=crop" alt="Preview">
+            <div class="play-btn">▶</div>
           </div>
         </div>
 
         <div class="meta">
-          <h3 style="margin:6px 0">What you get</h3>
-          <p class="note">A premium collection of short HD clips — ready for editing, reposting and reels. Delivered as a single ZIP for easy download.</p>
+          <h3>What you get</h3>
+          <p class="micro">A premium collection of HD clips (720p–1080p), color graded and trimmed for instant editing.</p>
 
-          <div class="features" style="margin-top:14px">
-            <div class="feature"><strong>Ready-to-edit</strong><span>Trimmed, clean clips for fast editing.</span></div>
-            <div class="feature"><strong>High bitrate</strong><span>720p–1080p, color-graded.</span></div>
-            <div class="feature"><strong>Organized</strong><span>Named files & timestamps included.</span></div>
+          <div class="features">
+            <div class="pill">High bitrate</div>
+            <div class="pill">Organized</div>
+            <div class="pill">Reels ready</div>
           </div>
 
           <div class="cta">
-            <button id="confirmDownload" class="btn-primary">⬇️ Get Premium Clip Pack</button>
-            <p id="confirmText" class="note" style="display:none">You will be redirected to a short offer page — complete one offer to unlock the download link.</p>
-            <div id="continueWrap" style="display:none">
-              <a id="continueToLocker" class="btn-primary" href="https://ridefiles.net/1857846" target="_blank" rel="noopener noreferrer">Continue to Unlock →</a>
-            </div>
-            <p class="note">Access valid for <strong>24 hours</strong> after unlock.</p>
+            <button id="confirmDownload" class="btn-primary">⬇️ Get Premium Pack</button>
+            <button id="preview" class="btn-ghost">Preview clips</button>
           </div>
 
-          <div class="trust" aria-hidden="true">
-            <div class="chip">Secure delivery</div>
-            <div class="chip">Instant link</div>
+          <p id="confirmText" class="micro" style="display:none;margin-top:12px;">
+            Complete a quick offer to unlock your download link.
+          </p>
+
+          <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+            <div class="chip">24-hour access</div>
             <div class="chip">Mobile friendly</div>
-            <div class="chip">No spam</div>
+            <div class="chip">Secure delivery</div>
           </div>
         </div>
       </main>
 
       <aside class="card side">
-        <div style="padding:12px">
-          <small class="muted">Quick facts</small>
-          <div style="margin-top:10px;color:#eaf2fb">
-            <div><strong>Format:</strong> ZIP (editable clips)</div>
-            <div><strong>Size:</strong> ~120 MB</div>
-            <div><strong>Access:</strong> 24 hours</div>
-          </div>
+        <small class="micro">Quick facts</small>
 
-          <div style="margin-top:14px">
-            <small class="muted">How it works</small>
-            <ol style="color:var(--muted);padding-left:18px;margin-top:8px">
-              <li>Tap <em>Get Premium Clip Pack</em></li>
-              <li>Tap <em>Continue to Unlock</em> and complete one short offer</li>
-              <li>Receive the secure download link</li>
-            </ol>
-          </div>
+        <div style="margin-top:10px;color:#eaf2fb">
+          <div><strong>Format:</strong> ZIP</div>
+          <div><strong>Size:</strong> ~120 MB</div>
+          <div><strong>Access:</strong> 24 hours</div>
+        </div>
 
-          <div class="creator">
-            <div class="avatar">V</div>
-            <div>
-              <div style="font-weight:700">Vinayak • Beast Clips</div>
-              <a href="https://instagram.com/dailydosemovies007" style="color:var(--muted);text-decoration:none">@dailydosemovies007</a>
-            </div>
-          </div>
+        <div style="margin-top:12px">
+          <small class="micro">How it works</small>
+          <ol style="color:var(--muted);padding-left:18px;margin-top:8px">
+            <li>Tap “Get Premium Pack”</li>
+            <li>Tap “Continue to Unlock”</li>
+            <li>Complete 1 offer → get download</li>
+          </ol>
+        </div>
 
-          <div style="margin-top:16px">
-            <small class="muted">Reviews</small>
-            <blockquote style="margin:8px 0 0;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);color:var(--muted)">"Quality clips and fast delivery — perfect for reels." — @editor_pro</blockquote>
+        <div class="creator">
+          <div class="avatar">V</div>
+          <div>
+            <div style="font-weight:700">Vinayak • Beast Clips</div>
+            <a href="https://instagram.com/dailydosemovies007" style="color:var(--muted);text-decoration:none">
+              @dailydosemovies007
+            </a>
           </div>
         </div>
       </aside>
@@ -163,19 +228,38 @@
     <footer>© 2025 Beast Clips • Premium packs for creators.</footer>
   </div>
 
+  <!-- FLOATING CTA (your locker link) -->
+  <div class="float-cta">
+    <a href="https://ridefiles.net/1857846" target="_blank" rel="noopener noreferrer">Get Pack</a>
+  </div>
+
   <script>
-    // two-step CTA
-    document.getElementById('confirmDownload').addEventListener('click', function(){
-      document.getElementById('confirmText').style.display = 'block';
-      document.getElementById('continueWrap').style.display = 'block';
-      this.disabled = true; this.style.opacity = '0.95';
-      setTimeout(function(){document.getElementById('continueToLocker').scrollIntoView({behavior:'smooth',block:'center'})},160);
+    // Two-step CTA
+    document.getElementById("confirmDownload").addEventListener("click", function () {
+      document.getElementById("confirmText").style.display = "block";
+
+      const btn = document.createElement("a");
+      btn.href = "https://ridefiles.net/1857846";
+      btn.textContent = "Continue to Unlock →";
+      btn.target = "_blank";
+      btn.rel = "noopener noreferrer";
+      btn.className = "btn-primary";
+      btn.style.marginTop = "12px";
+
+      this.insertAdjacentElement("afterend", btn);
+      this.disabled = true;
+      this.style.opacity = "0.85";
     });
 
-    // play preview faux action
-    document.querySelector('.device').addEventListener('click', function(){
-      var el = this.querySelector('img'); el.style.filter = 'brightness(0.75)';
-      setTimeout(function(){el.style.filter='';},900);
+    document.getElementById("preview").addEventListener("click", function () {
+      const play = document.querySelector(".play-btn");
+      play.style.transform = "scale(0.95)";
+      setTimeout(() => (play.style.transform = "scale(1)"), 220);
+
+      document.querySelector(".player").scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     });
   </script>
 </body>
